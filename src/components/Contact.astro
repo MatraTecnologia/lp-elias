@@ -1,0 +1,200 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { site, whatsappLink, instagramLink } from "../data/site";
+---
+
+<section class="ct" id="contato">
+  <div class="container ct__inner">
+    <div class="ct__aside" data-reveal>
+      <SectionHead eyebrow="Contato">
+        Vamos conversar<br />sobre a sua obra.
+        <Fragment slot="intro">
+          Conte em que etapa você está — projeto, reforma ou obra em andamento — e
+          retorno com o próximo passo.
+        </Fragment>
+      </SectionHead>
+
+      <ul class="ct__channels">
+        <li>
+          <a href={whatsappLink("Olá, Elias! Vim pelo site.")} target="_blank" rel="noopener">
+            <span class="ct__ch-label">WhatsApp</span>
+            <span class="ct__ch-val">Resposta direta</span>
+          </a>
+        </li>
+        <li>
+          <a href={instagramLink} target="_blank" rel="noopener">
+            <span class="ct__ch-label">Instagram</span>
+            <span class="ct__ch-val">@{site.instagram}</span>
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${site.email}`}>
+            <span class="ct__ch-label">E-mail</span>
+            <span class="ct__ch-val">{site.email}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <form class="ct__form" data-reveal style="--reveal-delay: 100ms" data-wa-form>
+      <label class="ct__field">
+        <span>Nome</span>
+        <input type="text" name="nome" required autocomplete="name" placeholder="Seu nome" />
+      </label>
+      <label class="ct__field">
+        <span>Telefone</span>
+        <input type="tel" name="telefone" required autocomplete="tel" placeholder="(00) 00000-0000" />
+      </label>
+      <label class="ct__field">
+        <span>Tipo de projeto</span>
+        <select name="tipo" required>
+          <option value="" disabled selected>Selecione</option>
+          <option>Projeto arquitetônico</option>
+          <option>Acompanhamento de obra</option>
+          <option>Gerenciamento e execução</option>
+          <option>Vistoria técnica</option>
+          <option>Regularização</option>
+          <option>Consultoria</option>
+        </select>
+      </label>
+      <label class="ct__field">
+        <span>Mensagem</span>
+        <textarea name="mensagem" rows="3" placeholder="Conte um pouco sobre o seu projeto"></textarea>
+      </label>
+      <button type="submit" class="btn btn--primary ct__submit">
+        Enviar pelo WhatsApp
+      </button>
+      <p class="ct__note">O envio abre uma conversa no WhatsApp com seus dados preenchidos.</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .ct {
+    padding-block: var(--section-y);
+    border-top: 1px solid var(--line-soft);
+    background: var(--ink-1);
+  }
+  .ct__inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+
+  .ct__channels {
+    list-style: none;
+    padding: 0;
+    margin-top: 2.6rem;
+    border-top: 1px solid var(--line);
+  }
+  .ct__channels a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--line);
+    transition: padding-inline-start 0.3s var(--ease);
+  }
+  .ct__channels a:hover {
+    padding-inline-start: 0.8rem;
+  }
+  .ct__ch-label {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+  }
+  .ct__ch-val {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--paper-dim);
+  }
+
+  .ct__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  .ct__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .ct__field:nth-child(3),
+  .ct__field:nth-child(4),
+  .ct__submit,
+  .ct__note {
+    grid-column: 1 / -1;
+  }
+  .ct__field span {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+  .ct__field input,
+  .ct__field select,
+  .ct__field textarea {
+    background: var(--ink);
+    border: 1px solid var(--line);
+    color: var(--paper);
+    padding: 0.9em 1em;
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    transition: border-color 0.3s var(--ease);
+    width: 100%;
+    resize: vertical;
+  }
+  .ct__field input::placeholder,
+  .ct__field textarea::placeholder {
+    color: var(--paper-faint);
+  }
+  .ct__field input:focus,
+  .ct__field select:focus,
+  .ct__field textarea:focus {
+    outline: none;
+    border-color: var(--copper);
+  }
+  .ct__submit {
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  .ct__note {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--paper-faint);
+    text-align: center;
+    margin-top: -0.4rem;
+  }
+
+  @media (max-width: 900px) {
+    .ct__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .ct__form {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ waBase: whatsappLink() }}>
+  const form = document.querySelector("[data-wa-form]");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = new FormData(form);
+    const nome = (f.get("nome") || "").toString().trim();
+    const tel = (f.get("telefone") || "").toString().trim();
+    const tipo = (f.get("tipo") || "").toString().trim();
+    const msg = (f.get("mensagem") || "").toString().trim();
+    const text =
+      `Olá, Elias! Sou ${nome}.\n` +
+      `Telefone: ${tel}\n` +
+      `Interesse: ${tipo}` +
+      (msg ? `\n\n${msg}` : "");
+    window.open(`${waBase}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+  });
+</script>

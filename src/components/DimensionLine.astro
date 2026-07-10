@@ -1,0 +1,107 @@
+---
+/* Signature: linha de cota técnica (estilo prancha de projeto).
+   Vertical por padrão — "mede" o elemento ao lado com um rótulo em mono. */
+interface Props {
+  label: string;
+  orientation?: "v" | "h";
+  align?: "start" | "center" | "end";
+}
+const { label, orientation = "v", align = "center" } = Astro.props;
+---
+
+<div class={`dim dim--${orientation}`} data-align={align} aria-hidden="true">
+  <span class="dim__cap"></span>
+  <span class="dim__track"></span>
+  <span class="dim__label">{label}</span>
+  <span class="dim__track"></span>
+  <span class="dim__cap"></span>
+</div>
+
+<style>
+  .dim {
+    display: flex;
+    align-items: center;
+    color: var(--paper-dim);
+    --dim-color: var(--line);
+    --tick: var(--copper);
+  }
+
+  .dim__cap {
+    background: var(--tick);
+    flex: none;
+  }
+
+  .dim__track {
+    background: var(--dim-color);
+    flex: 1;
+    transform-origin: center;
+  }
+
+  .dim__label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex: none;
+  }
+
+  /* Vertical */
+  .dim--v {
+    flex-direction: column;
+    height: 100%;
+  }
+  .dim--v .dim__cap {
+    width: 12px;
+    height: 1px;
+  }
+  .dim--v .dim__track {
+    width: 1px;
+    min-height: 24px;
+  }
+  .dim--v .dim__label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding-block: 1.1em;
+    color: var(--paper-dim);
+  }
+
+  /* Horizontal */
+  .dim--h {
+    flex-direction: row;
+    width: 100%;
+  }
+  .dim--h .dim__cap {
+    width: 1px;
+    height: 12px;
+  }
+  .dim--h .dim__track {
+    height: 1px;
+    min-width: 24px;
+  }
+  .dim--h .dim__label {
+    padding-inline: 1.1em;
+  }
+
+  /* Draw-in: as linhas "traçam" a partir do centro quando reveladas */
+  :global([data-reveal]) .dim--v .dim__track {
+    transform: scaleY(0);
+    transition: transform 0.9s var(--ease) 0.15s;
+  }
+  :global([data-reveal].is-in) .dim--v .dim__track {
+    transform: scaleY(1);
+  }
+  :global([data-reveal]) .dim--h .dim__track {
+    transform: scaleX(0);
+    transition: transform 0.9s var(--ease) 0.15s;
+  }
+  :global([data-reveal].is-in) .dim--h .dim__track {
+    transform: scaleX(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dim__track {
+      transform: none !important;
+    }
+  }
+</style>

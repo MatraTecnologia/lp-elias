@@ -1,0 +1,44 @@
+---
+interface Props {
+  eyebrow: string;
+  align?: "start" | "center";
+}
+const { eyebrow, align = "start" } = Astro.props;
+---
+
+<div class={`shead shead--${align}`}>
+  <p class="eyebrow">{eyebrow}</p>
+  <h2 class="shead__title"><slot /></h2>
+  {
+    Astro.slots.has("intro") && (
+      <p class="shead__intro">
+        <slot name="intro" />
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .shead {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    max-width: 42ch;
+  }
+  .shead--center {
+    align-items: center;
+    text-align: center;
+    margin-inline: auto;
+  }
+  .shead__title {
+    font-size: var(--step-4);
+  }
+  .shead__intro {
+    color: var(--paper-dim);
+    font-size: var(--step-1);
+    max-width: 52ch;
+  }
+  .shead--center .shead__intro {
+    margin-inline: auto;
+  }
+</style>

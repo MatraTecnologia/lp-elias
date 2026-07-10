@@ -1,0 +1,111 @@
+---
+import { site, nav, whatsappLink, instagramLink } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="ft">
+  <div class="container ft__inner">
+    <div class="ft__brand">
+      <a href="#top" class="ft__name">{site.name}</a>
+      <p class="ft__role">{site.role} · {site.cau}</p>
+      <p class="ft__loc">{site.location}</p>
+    </div>
+
+    <nav class="ft__nav" aria-label="Rodapé">
+      {nav.map((i) => <a href={i.href}>{i.label}</a>)}
+    </nav>
+
+    <div class="ft__contact">
+      <a href={whatsappLink("Olá, Elias!")} target="_blank" rel="noopener">WhatsApp</a>
+      <a href={instagramLink} target="_blank" rel="noopener">Instagram</a>
+      <a href={`mailto:${site.email}`}>E-mail</a>
+    </div>
+  </div>
+
+  <div class="container ft__base">
+    <span>© {year} {site.name}. Arquitetura e acompanhamento de obras.</span>
+    <span class="ft__credit">
+      Site por <a href="https://matratecnologia.com" target="_blank" rel="noopener">Matra Tecnologia</a>
+    </span>
+  </div>
+</footer>
+
+<style>
+  .ft {
+    border-top: 1px solid var(--line);
+    padding-top: clamp(3rem, 6vw, 5rem);
+    background: var(--ink);
+  }
+  .ft__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2.5rem;
+    padding-bottom: 3rem;
+  }
+  .ft__name {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+  }
+  .ft__role {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    margin-top: 0.8rem;
+  }
+  .ft__loc {
+    color: var(--paper-faint);
+    font-size: var(--step--1);
+    margin-top: 0.3rem;
+  }
+
+  .ft__nav,
+  .ft__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  .ft__nav a,
+  .ft__contact a {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    width: fit-content;
+    transition: color 0.25s var(--ease);
+  }
+  .ft__nav a:hover,
+  .ft__contact a:hover {
+    color: var(--copper);
+  }
+
+  .ft__base {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-block: 1.8rem;
+    border-top: 1px solid var(--line-soft);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--paper-faint);
+  }
+  .ft__credit a {
+    color: var(--paper-dim);
+  }
+  .ft__credit a:hover {
+    color: var(--copper);
+  }
+
+  @media (max-width: 700px) {
+    .ft__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+    .ft__brand {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

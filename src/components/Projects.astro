@@ -1,0 +1,125 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { whatsappLink } from "../data/site";
+
+const tiles = [
+  { tag: "Residencial", ref: "RES" },
+  { tag: "Comercial", ref: "COM" },
+  { tag: "Reforma", ref: "REF" },
+  { tag: "Regularização", ref: "REG" },
+];
+---
+
+<section class="prj" id="projetos">
+  <div class="container">
+    <div class="prj__head" data-reveal>
+      <SectionHead eyebrow="Projetos">
+        Obras em breve<br />nesta prancha.
+        <Fragment slot="intro">
+          O portfólio está sendo montado com registros das obras acompanhadas.
+          Enquanto isso, os projetos podem ser apresentados diretamente por aqui.
+        </Fragment>
+      </SectionHead>
+      <a
+        class="btn btn--ghost prj__cta"
+        href={whatsappLink("Olá, Elias! Gostaria de ver alguns projetos já executados.")}
+        target="_blank"
+        rel="noopener">Solicitar projetos</a
+      >
+    </div>
+
+    <ul class="prj__grid">
+      {
+        tiles.map((t, i) => (
+          <li class="prj__tile" data-reveal style={`--reveal-delay: ${(i % 4) * 70}ms`}>
+            <span class="prj__ref">{t.ref} — 00</span>
+            <span class="prj__soon">Em breve</span>
+            <span class="prj__tag">{t.tag}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .prj {
+    padding-block: var(--section-y);
+    border-top: 1px solid var(--line-soft);
+  }
+  .prj__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .prj__cta {
+    flex: none;
+  }
+
+  .prj__grid {
+    list-style: none;
+    padding: 0;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+  }
+  .prj__tile {
+    aspect-ratio: 3 / 4;
+    border: 1px dashed var(--line);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.5rem;
+    text-align: center;
+    /* papel milimetrado / vegetal */
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 22px 22px;
+    transition: border-color 0.35s var(--ease);
+  }
+  .prj__tile:hover {
+    border-color: var(--copper);
+  }
+  .prj__ref {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    color: var(--paper-faint);
+  }
+  .prj__soon {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--paper-dim);
+  }
+  .prj__tag {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  @media (max-width: 900px) {
+    .prj__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 460px) {
+    .prj__grid {
+      grid-template-columns: 1fr;
+    }
+    .prj__tile {
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>

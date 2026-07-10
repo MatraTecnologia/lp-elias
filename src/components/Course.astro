@@ -1,0 +1,91 @@
+---
+import { whatsappLink } from "../data/site";
+---
+
+<section class="crs">
+  <div class="container crs__inner" data-reveal>
+    <div class="crs__badge">
+      <span class="crs__dot" aria-hidden="true"></span>
+      Em breve — Curso
+    </div>
+    <h2 class="crs__title">
+      O que ele faz na obra,<br />ensinado passo a passo.
+    </h2>
+    <p class="crs__text">
+      Um curso para quem vai construir ou reformar e quer entender de planejamento,
+      controle de obra e gestão de execução — para não depender da sorte. Está em
+      preparação. Entre na lista para saber quando abrir.
+    </p>
+    <a
+      class="btn btn--primary"
+      href={whatsappLink("Olá, Elias! Quero entrar na lista de espera do curso.")}
+      target="_blank"
+      rel="noopener">Entrar na lista de espera</a
+    >
+  </div>
+</section>
+
+<style>
+  .crs {
+    padding-block: clamp(4rem, 7vw, 7rem);
+    border-top: 1px solid var(--line-soft);
+    position: relative;
+    overflow: hidden;
+  }
+  .crs::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 50% 120%,
+      color-mix(in srgb, var(--copper) 14%, transparent),
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+  .crs__inner {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+    max-width: 40ch;
+    margin-inline: auto;
+  }
+  .crs__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--copper);
+    border: 1px solid var(--copper-dim);
+    border-radius: 100px;
+    padding: 0.5em 1.1em;
+  }
+  .crs__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--copper);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--copper) 70%, transparent);
+    animation: pulse 2.4s var(--ease) infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--copper) 60%, transparent); }
+    70% { box-shadow: 0 0 0 8px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .crs__dot { animation: none; }
+  }
+  .crs__title {
+    font-size: var(--step-3);
+  }
+  .crs__text {
+    color: var(--paper-dim);
+  }
+</style>

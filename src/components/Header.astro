@@ -1,0 +1,210 @@
+---
+import { nav, site, whatsappLink } from "../data/site";
+---
+
+<header class="hd" data-header>
+  <div class="container hd__inner">
+    <a href="#top" class="hd__brand" aria-label={`${site.name}, ${site.role}`}>
+      <span class="hd__name">{site.name}</span>
+      <span class="hd__role">{site.role}</span>
+    </a>
+
+    <nav class="hd__nav" aria-label="Seções">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <a
+      class="hd__cta"
+      href={whatsappLink("Olá, Elias! Vim pelo site e gostaria de conversar sobre um projeto.")}
+      target="_blank"
+      rel="noopener"
+    >
+      WhatsApp
+    </a>
+
+    <button class="hd__burger" data-burger aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="hd__mobile" data-mobile aria-label="Menu">
+    {nav.map((item) => <a href={item.href} data-mobile-link>{item.label}</a>)}
+    <a
+      href={whatsappLink("Olá, Elias! Vim pelo site e gostaria de conversar sobre um projeto.")}
+      target="_blank"
+      rel="noopener"
+      data-mobile-link
+      class="hd__mobile-cta">Falar no WhatsApp</a
+    >
+  </nav>
+</header>
+
+<style>
+  .hd {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  .hd[data-scrolled] {
+    background: color-mix(in srgb, var(--ink) 82%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom-color: var(--line-soft);
+  }
+
+  .hd__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 76px;
+  }
+
+  .hd__brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    margin-right: auto;
+  }
+  .hd__name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+  }
+  .hd__role {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    margin-top: 0.2em;
+  }
+
+  .hd__nav {
+    display: flex;
+    gap: 1.9rem;
+  }
+  .hd__nav a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    position: relative;
+    padding-block: 0.4em;
+    transition: color 0.25s var(--ease);
+  }
+  .hd__nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--copper);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease);
+  }
+  .hd__nav a:hover {
+    color: var(--paper);
+  }
+  .hd__nav a:hover::after {
+    transform: scaleX(1);
+  }
+
+  .hd__cta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.7em 1.3em;
+    border: 1px solid var(--line);
+    color: var(--paper);
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
+  }
+  .hd__cta:hover {
+    background: var(--copper);
+    border-color: var(--copper);
+    color: var(--ink);
+  }
+
+  .hd__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+  }
+  .hd__burger span {
+    width: 24px;
+    height: 1.5px;
+    background: var(--paper);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+  .hd[data-open] .hd__burger span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+  .hd[data-open] .hd__burger span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  .hd__mobile {
+    display: none;
+    flex-direction: column;
+    padding: 0.5rem var(--gutter) 2rem;
+    background: var(--ink-1);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .hd__mobile a {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    border-top: 1px solid var(--line-soft);
+    color: var(--paper-dim);
+  }
+  .hd__mobile-cta {
+    color: var(--copper) !important;
+  }
+
+  @media (max-width: 860px) {
+    .hd__nav,
+    .hd__cta {
+      display: none;
+    }
+    .hd__burger {
+      display: flex;
+    }
+    .hd[data-open] .hd__mobile {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector("[data-header]") as HTMLElement;
+  const burger = document.querySelector("[data-burger]") as HTMLElement;
+
+  const onScroll = () => {
+    if (window.scrollY > 12) header.setAttribute("data-scrolled", "");
+    else header.removeAttribute("data-scrolled");
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  const toggle = () => {
+    const open = header.hasAttribute("data-open");
+    if (open) {
+      header.removeAttribute("data-open");
+      burger.setAttribute("aria-expanded", "false");
+    } else {
+      header.setAttribute("data-open", "");
+      burger.setAttribute("aria-expanded", "true");
+    }
+  };
+  burger?.addEventListener("click", toggle);
+  document.querySelectorAll("[data-mobile-link]").forEach((l) =>
+    l.addEventListener("click", () => header.removeAttribute("data-open")),
+  );
+</script>

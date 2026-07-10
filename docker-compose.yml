@@ -1,0 +1,8 @@
+# Uso local: docker compose up --build  → http://localhost:8080
+# No EasyPanel isto não é necessário; ele constrói o Dockerfile diretamente.
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    restart: unless-stopped

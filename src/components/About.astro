@@ -1,0 +1,215 @@
+---
+import { Image } from "astro:assets";
+import { site, stats } from "../data/site";
+import portraitWarm from "../assets/photos/portrait-warm.jpg";
+import couple from "../assets/photos/couple.jpg";
+---
+
+<section class="abt" id="sobre">
+  <div class="container abt__inner">
+    <div class="abt__media" data-reveal>
+      <figure class="abt__main">
+        <Image
+          src={portraitWarm}
+          alt={`${site.name} em retrato`}
+          widths={[420, 680, 900]}
+          sizes="(max-width: 900px) 90vw, 420px"
+          loading="lazy"
+        />
+        <span class="abt__corner" aria-hidden="true"></span>
+      </figure>
+      <figure class="abt__inset">
+        <Image
+          src={couple}
+          alt={`${site.name} e família`}
+          widths={[220, 360]}
+          sizes="180px"
+          loading="lazy"
+        />
+      </figure>
+    </div>
+
+    <div class="abt__body" data-reveal style="--reveal-delay: 100ms">
+      <p class="eyebrow">Sobre</p>
+      <h2 class="abt__title">Quem conduz<br />a sua obra.</h2>
+
+      <p class="abt__lead">
+        {site.name} é {site.role.toLowerCase()} e trabalha na fronteira onde a
+        maioria dos projetos tropeça: a passagem do papel para o canteiro.
+      </p>
+      <p class="abt__text">
+        Mais do que desenhar, ele acompanha. Planeja a obra antes de começar,
+        organiza equipe e cronograma, e está presente na execução para garantir
+        que o que foi projetado seja o que se constrói — com controle técnico,
+        prazo respeitado e nenhum desperdício.
+      </p>
+      <p class="abt__text">
+        É esse acompanhamento de perto, do primeiro estudo à entrega, que separa
+        uma obra conduzida de uma obra que apenas acontece.
+      </p>
+
+      <dl class="abt__meta">
+        <div><dt>Registro</dt><dd>{site.cau}</dd></div>
+        <div><dt>Atuação</dt><dd>{site.location}</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="abt__stats" data-reveal>
+      {
+        stats.map((s, i) => (
+          <>
+            {i > 0 && <span class="abt__stat-div" aria-hidden="true" />}
+            <div class="abt__stat">
+              <span class="abt__stat-val">{s.value}</span>
+              <span class="abt__stat-label">{s.label}</span>
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .abt {
+    padding-block: var(--section-y);
+    border-top: 1px solid var(--line-soft);
+    background: var(--ink-1);
+  }
+  .abt__inner {
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+  }
+
+  .abt__media {
+    position: relative;
+  }
+  .abt__main {
+    position: relative;
+    max-width: 420px;
+  }
+  .abt__main img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    filter: contrast(1.02);
+  }
+  .abt__corner {
+    position: absolute;
+    right: -7px;
+    bottom: -7px;
+    width: 26px;
+    height: 26px;
+    border-right: 1px solid var(--copper);
+    border-bottom: 1px solid var(--copper);
+  }
+  .abt__inset {
+    position: absolute;
+    right: -18px;
+    bottom: -34px;
+    width: 40%;
+    max-width: 170px;
+    border: 4px solid var(--ink-1);
+  }
+  .abt__inset img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(0.1);
+  }
+
+  .abt__title {
+    font-size: var(--step-4);
+    margin: 1.1rem 0 1.6rem;
+  }
+  .abt__lead {
+    font-size: var(--step-1);
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+  }
+  .abt__text {
+    color: var(--paper-dim);
+    margin-bottom: 1rem;
+    max-width: 54ch;
+  }
+
+  .abt__meta {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+  }
+  .abt__meta dt {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-faint);
+    margin-bottom: 0.4em;
+  }
+  .abt__meta dd {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+  }
+
+  .abt__stats {
+    margin-top: clamp(4rem, 8vw, 7rem);
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding-block: 2.6rem;
+  }
+  .abt__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  .abt__stat-val {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    color: var(--paper);
+    line-height: 1;
+  }
+  .abt__stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    max-width: 16ch;
+  }
+  .abt__stat-div {
+    width: 1px;
+    align-self: stretch;
+    background: var(--line);
+  }
+
+  @media (max-width: 900px) {
+    .abt__inner {
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+    }
+    .abt__main {
+      max-width: 360px;
+    }
+  }
+  @media (max-width: 560px) {
+    .abt__stats {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    .abt__stat-div {
+      display: none;
+    }
+  }
+</style>

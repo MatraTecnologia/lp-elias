@@ -1,0 +1,94 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { problems } from "../data/site";
+---
+
+<section class="prob" id="problema">
+  <div class="container">
+    <div data-reveal>
+      <SectionHead eyebrow="O problema">
+        A obra não falha por acaso.<br />Falha por falta de <em>controle</em>.
+        <Fragment slot="intro">
+          Quase todo problema numa construção nasce muito antes da parede subir —
+          e se repete quando ninguém está de olho na execução.
+        </Fragment>
+      </SectionHead>
+    </div>
+
+    <ul class="prob__grid">
+      {
+        problems.map((p, i) => (
+          <li class="prob__item" data-reveal style={`--reveal-delay: ${i * 80}ms`}>
+            <span class="prob__idx">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="prob__title">{p.title}</h3>
+            <p class="prob__body">{p.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .prob {
+    padding-block: var(--section-y);
+    border-top: 1px solid var(--line-soft);
+  }
+  .prob :global(.shead__title em) {
+    font-style: italic;
+    color: var(--copper);
+  }
+
+  .prob__grid {
+    list-style: none;
+    padding: 0;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+  }
+  .prob__item {
+    padding: 2rem 1.6rem 2.4rem;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .prob__item:first-child {
+    border-left: 1px solid var(--line);
+  }
+  .prob__idx {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--copper);
+  }
+  .prob__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    margin: 1.6rem 0 0.8rem;
+    line-height: 1.1;
+  }
+  .prob__body {
+    color: var(--paper-dim);
+    font-size: var(--step--1);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .prob__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .prob__item:nth-child(odd) {
+      border-left: 1px solid var(--line);
+    }
+  }
+  @media (max-width: 560px) {
+    .prob__grid {
+      grid-template-columns: 1fr;
+    }
+    .prob__item,
+    .prob__item:nth-child(odd) {
+      border-left: 1px solid var(--line);
+    }
+  }
+</style>

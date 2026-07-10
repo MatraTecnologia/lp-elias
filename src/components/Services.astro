@@ -1,0 +1,95 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { services } from "../data/site";
+---
+
+<section class="srv" id="servicos">
+  <div class="container">
+    <div data-reveal>
+      <SectionHead eyebrow="Serviços">
+        Do primeiro traço<br />à entrega das chaves.
+        <Fragment slot="intro">
+          Um único responsável técnico do projeto à obra — para que nada se perca
+          na passagem entre desenhar e construir.
+        </Fragment>
+      </SectionHead>
+    </div>
+
+    <div class="srv__grid">
+      {
+        services.map((s, i) => (
+          <article class="srv__card" data-reveal style={`--reveal-delay: ${(i % 3) * 80}ms`}>
+            <h3 class="srv__title">{s.title}</h3>
+            <p class="srv__body">{s.body}</p>
+            <span class="srv__mark" aria-hidden="true" />
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .srv {
+    padding-block: var(--section-y);
+    border-top: 1px solid var(--line-soft);
+    background: var(--ink-1);
+  }
+
+  .srv__grid {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .srv__card {
+    background: var(--ink-1);
+    padding: 2.4rem 2rem 2.8rem;
+    position: relative;
+    transition: background 0.35s var(--ease);
+  }
+  .srv__card:hover {
+    background: var(--ink-2);
+  }
+  .srv__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.08;
+    margin-bottom: 1rem;
+  }
+  .srv__body {
+    color: var(--paper-dim);
+    font-size: var(--step--1);
+    line-height: 1.62;
+    max-width: 40ch;
+  }
+  .srv__mark {
+    position: absolute;
+    left: 2rem;
+    bottom: 1.6rem;
+    width: 26px;
+    height: 1px;
+    background: var(--copper);
+    transform: scaleX(0.4);
+    transform-origin: left;
+    opacity: 0.5;
+    transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+  }
+  .srv__card:hover .srv__mark {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  @media (max-width: 900px) {
+    .srv__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .srv__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

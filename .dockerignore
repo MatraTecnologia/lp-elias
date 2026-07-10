@@ -1,0 +1,19 @@
+# Deps e artefatos — reinstalados/reconstruídos dentro da imagem
+node_modules
+dist
+.astro
+
+# Fotos-fonte (432MB) — não fazem parte do site publicado
+fotos-originais
+
+# Controle de versão / editor / logs
+.git
+.gitignore
+.vscode
+*.log
+npm-debug.log*
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml

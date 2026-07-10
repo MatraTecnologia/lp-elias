@@ -1,0 +1,265 @@
+---
+import { Image } from "astro:assets";
+import { site, whatsappLink } from "../data/site";
+import DimensionLine from "./DimensionLine.astro";
+import heroImg from "../assets/photos/hero.jpg";
+---
+
+<section class="hero" id="top">
+  <div class="container hero__inner">
+    <div class="hero__text" data-reveal>
+      <p class="eyebrow">{site.role} — {site.location}</p>
+
+      <h1 class="hero__title">
+        A arquitetura<br />não termina<br /><em>na planta.</em>
+      </h1>
+
+      <p class="hero__lede">
+        {site.name} conduz cada etapa da construção — do projeto à entrega das chaves —
+        com método, controle técnico e o prazo sob domínio. Você acompanha a obra
+        sendo feita do jeito certo.
+      </p>
+
+      <div class="hero__cta">
+        <a
+          class="btn btn--primary"
+          href={whatsappLink(
+            "Olá, Elias! Vim pelo site e gostaria de conversar sobre um projeto.",
+          )}
+          target="_blank"
+          rel="noopener"
+        >
+          Falar no WhatsApp
+        </a>
+        <a class="btn btn--ghost" href="#servicos">Ver serviços</a>
+      </div>
+    </div>
+
+    <figure class="hero__media" data-reveal style="--reveal-delay: 120ms">
+      <div class="hero__dim">
+        <DimensionLine label="Arquiteto · Urbanista" />
+      </div>
+      <div class="hero__frame">
+        <Image
+          src={heroImg}
+          alt={`${site.name}, ${site.role}`}
+          widths={[480, 760, 1000]}
+          sizes="(max-width: 900px) 80vw, 440px"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <span class="hero__tag">{site.name}</span>
+      </div>
+    </figure>
+  </div>
+
+  <a href="#problema" class="hero__scroll" aria-label="Rolar para baixo">
+    <span>Role</span>
+    <span class="hero__scroll-line"></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: 76px;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* grade de projeto — linhas verticais finas, papel vegetal */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent calc(25% - 1px),
+      var(--line-soft) calc(25% - 1px),
+      var(--line-soft) 25%
+    );
+    opacity: 0.6;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  }
+  /* brilho quente atrás do retrato, ecoando as luzes das fotos */
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 40%;
+    right: 8%;
+    width: 45vw;
+    height: 45vw;
+    max-width: 620px;
+    max-height: 620px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--copper) 16%, transparent), transparent 68%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+
+  .hero__title {
+    font-size: var(--step-5);
+    margin: 1.4rem 0 1.8rem;
+  }
+  .hero__title em {
+    font-style: italic;
+    color: var(--copper);
+  }
+
+  .hero__lede {
+    max-width: 46ch;
+    color: var(--paper-dim);
+    font-size: var(--step-1);
+    line-height: 1.55;
+  }
+
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.4rem;
+  }
+
+  .hero__media {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: flex-end;
+    align-items: stretch;
+  }
+  .hero__dim {
+    height: auto;
+  }
+
+  .hero__frame {
+    position: relative;
+    max-width: 440px;
+  }
+  .hero__frame img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(0.15) contrast(1.02);
+    border: 1px solid var(--line);
+  }
+  .hero__frame::before {
+    /* marca de canto tipo prancha */
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: -7px;
+    width: 22px;
+    height: 22px;
+    border-top: 1px solid var(--copper);
+    border-left: 1px solid var(--copper);
+  }
+  .hero__tag {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: color-mix(in srgb, var(--ink) 70%, transparent);
+    backdrop-filter: blur(4px);
+    padding: 0.4em 0.8em;
+    border: 1px solid var(--line);
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--paper-faint);
+    z-index: 1;
+  }
+  .hero__scroll-line {
+    width: 1px;
+    height: 42px;
+    background: linear-gradient(to bottom, var(--copper), transparent);
+    animation: drop 2.2s var(--ease) infinite;
+  }
+  @keyframes drop {
+    0% { transform: scaleY(0); transform-origin: top; }
+    45% { transform: scaleY(1); transform-origin: top; }
+    55% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__scroll-line { animation: none; }
+  }
+
+  /* Botões (compartilhados via classes locais, reusados por outras seções) */
+  :global(.btn) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1.05em 1.7em;
+    transition: transform 0.25s var(--ease), background 0.3s var(--ease),
+      border-color 0.3s var(--ease), color 0.3s var(--ease);
+  }
+  :global(.btn--primary) {
+    background: var(--copper);
+    color: var(--ink);
+  }
+  :global(.btn--primary:hover) {
+    background: var(--paper);
+    transform: translateY(-2px);
+  }
+  :global(.btn--ghost) {
+    border: 1px solid var(--line);
+    color: var(--paper);
+  }
+  :global(.btn--ghost:hover) {
+    border-color: var(--copper);
+    color: var(--copper);
+  }
+
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .hero__media {
+      justify-content: flex-start;
+      order: -1;
+    }
+    .hero__frame {
+      max-width: 340px;
+    }
+    .hero__scroll {
+      display: none;
+    }
+  }
+  @media (max-width: 520px) {
+    .hero__dim {
+      display: none;
+    }
+  }
+</style>
