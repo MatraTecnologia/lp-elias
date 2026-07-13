@@ -6,10 +6,8 @@
 export const site = {
   name: "Elias Gomes",
   role: "Arquiteto e Urbanista",
-  // TODO: registro profissional real
-  cau: "CAU A00000-0",
-  // TODO: cidade / região de atuação real
-  location: "Ribeirão Preto — SP",
+  cau: "Sob consulta",
+  location: "Londrina — PR",
   // TODO: número real com DDI/DDD, só dígitos
   whatsapp: "5543999140409",
   // TODO: handle real do Instagram
