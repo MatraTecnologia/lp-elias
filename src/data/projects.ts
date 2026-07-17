@@ -49,7 +49,7 @@ export const projects: Project[] = [
   },
   {
     slug: "clinica-mavi",
-    title: "Clínica Mavi",
+    title: "Clínica Amavi",
     category: "Comercial",
     scope: "Fachada + interiores",
     images: [
