@@ -43,7 +43,7 @@ export const problems = [
   },
   {
     title: "Execução fora do projeto",
-    body: "O que foi desenhado nem sempre é o que se constrói. Sem controle técnico, o resultado se distancia do combinado.",
+    body: "O que foi projetado nem sempre é o que se constrói. Sem controle técnico, o resultado se distancia do combinado.",
   },
 ];
 
@@ -51,7 +51,7 @@ export const services = [
   {
     code: "01",
     title: "Projeto arquitetônico",
-    body: "Residencial e comercial. Do estudo preliminar ao executivo, com desenho pensado para ser construído — não só para ser bonito.",
+    body: "Residencial e comercial. Do estudo preliminar ao executivo, com desenho pensado para ser construído.",
   },
   {
     code: "02",
@@ -66,12 +66,12 @@ export const services = [
   {
     code: "04",
     title: "Vistorias técnicas",
-    body: "Avaliação do estado da construção, laudos e diagnósticos para decidir com base técnica, não em achismo.",
+    body: "Avaliação do estado da construção, laudos e diagnósticos para decidir com base técnica.",
   },
   {
     code: "05",
     title: "Regularização de imóveis",
-    body: "Documentação, adequação às normas e regularização junto aos órgãos competentes para deixar o imóvel em dia.",
+    body: "Documentação, adequação às normas e regularização junto aos órgãos competentes.",
   },
   {
     code: "06",
@@ -105,7 +105,7 @@ export const method = [
 
 /* Números de prova. TODO: substituir pelos dados reais do Elias. */
 export const stats = [
-  { value: "+12", label: "anos de experiência" },
+  { value: "+10", label: "anos de experiência" },
   { value: "+80", label: "obras acompanhadas" },
   { value: "100%", label: "execução conforme projeto" },
 ];
