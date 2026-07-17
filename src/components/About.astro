@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import { site, stats } from "../data/site";
-import portraitWarm from "../assets/photos/portrait-warm.jpg";
-import couple from "../assets/photos/couple.jpg";
+import portraitWarm from "../assets/photos/portrait-warm.jpeg";
+
 ---
 
 <section class="abt" id="sobre">
@@ -17,15 +17,6 @@ import couple from "../assets/photos/couple.jpg";
           loading="lazy"
         />
         <span class="abt__corner" aria-hidden="true"></span>
-      </figure>
-      <figure class="abt__inset">
-        <Image
-          src={couple}
-          alt={`${site.name} e família`}
-          widths={[220, 360]}
-          sizes="180px"
-          loading="lazy"
-        />
       </figure>
     </div>
 
