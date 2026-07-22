@@ -109,34 +109,12 @@ export const projects: Project[] = [
     images: ["01.png", "02.png", "03.png"],
   },
   {
-    slug: "residencia-moderna",
-    title: "Residência Moderna",
-    category: "Residencial",
-    scope: "Volumetria",
-    images: ["01.png", "02.png"],
-  },
-  {
-    slug: "sobrado-londrina",
-    title: "Sobrado Londrina",
-    category: "Residencial",
-    scope: "Volumetria",
-    location: "Londrina",
-    images: ["01.png", "02.png"],
-  },
-  {
     slug: "rolandia",
     title: "Residência Rolândia",
     category: "Residencial",
     scope: "Volumetria",
     location: "Rolândia",
     images: ["01.jpg", "02.jpg", "03.jpg"],
-  },
-  {
-    slug: "espaco-gourmet",
-    title: "Espaço Gourmet",
-    category: "Comercial",
-    scope: "Interiores",
-    images: ["01.png", "02.png", "03.png"],
   },
   {
     slug: "cambe",
@@ -153,13 +131,6 @@ export const projects: Project[] = [
     scope: "Volumetria",
     location: "Londrina",
     images: ["01.jpeg"],
-  },
-  {
-    slug: "residencia-sobrado",
-    title: "Residência Sobrado",
-    category: "Residencial",
-    scope: "Volumetria",
-    images: ["01.png"],
   },
   {
     slug: "residencia-compacta",

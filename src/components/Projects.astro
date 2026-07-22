@@ -42,19 +42,27 @@ const filters = ["Todos", "Residencial", "Comercial"] as const;
       <SectionHead eyebrow="Projetos">
         Projetos que saíram<br />do papel para a obra.
         <Fragment slot="intro">
-          Uma seleção de residências e espaços comerciais desenhados e conduzidos
-          por Elias — do Estudo de volumetria, fechadas externas e ambientes internos
+          Uma seleção de residências e espaços comerciais desenhados e
+          conduzidos por Elias — do Estudo de volumetria, fechadas externas e
+          ambientes internos
         </Fragment>
       </SectionHead>
       <a
         class="btn btn--ghost prj__cta"
-        href={whatsappLink("Olá, Elias! Gostaria de conhecer mais projetos executados.")}
+        href={whatsappLink(
+          "Olá, Elias! Gostaria de conhecer mais projetos executados.",
+        )}
         target="_blank"
         rel="noopener">Falar sobre o meu projeto</a
       >
     </div>
 
-    <div class="prj__filters" data-reveal role="tablist" aria-label="Filtrar projetos">
+    <div
+      class="prj__filters"
+      data-reveal
+      role="tablist"
+      aria-label="Filtrar projetos"
+    >
       {
         filters.map((f, i) => (
           <button
@@ -80,7 +88,11 @@ const filters = ["Todos", "Residencial", "Comercial"] as const;
             data-reveal
             style={`--reveal-delay: ${(i % 3) * 70}ms`}
           >
-            <button class="prj__open" type="button" aria-label={`Ver projeto ${t.title}`}>
+            <button
+              class="prj__open"
+              type="button"
+              aria-label={`Ver projeto ${t.title}`}
+            >
               <Image
                 class="prj__img"
                 src={t.cover}
@@ -118,9 +130,21 @@ const filters = ["Todos", "Residencial", "Comercial"] as const;
 
   <div class="lb" id="prj-lb" hidden aria-hidden="true">
     <div class="lb__backdrop" data-lb-close></div>
-    <div class="lb__stage" role="dialog" aria-modal="true" aria-label="Galeria do projeto">
-      <button class="lb__x" type="button" aria-label="Fechar" data-lb-close>&times;</button>
-      <button class="lb__nav lb__nav--prev" type="button" aria-label="Anterior" data-lb-prev>
+    <div
+      class="lb__stage"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Galeria do projeto"
+    >
+      <button class="lb__x" type="button" aria-label="Fechar" data-lb-close
+        >&times;</button
+      >
+      <button
+        class="lb__nav lb__nav--prev"
+        type="button"
+        aria-label="Anterior"
+        data-lb-prev
+      >
         &#8592;</button
       >
       <figure class="lb__figure">
@@ -130,7 +154,12 @@ const filters = ["Todos", "Residencial", "Comercial"] as const;
           <span class="lb__counter"></span>
         </figcaption>
       </figure>
-      <button class="lb__nav lb__nav--next" type="button" aria-label="Próxima" data-lb-next>
+      <button
+        class="lb__nav lb__nav--next"
+        type="button"
+        aria-label="Próxima"
+        data-lb-next
+      >
         &#8594;</button
       >
     </div>
@@ -424,14 +453,20 @@ const filters = ["Todos", "Residencial", "Comercial"] as const;
 
 <script>
   const grid = document.getElementById("prj-grid");
-  const tiles = Array.from(document.querySelectorAll<HTMLElement>(".prj__tile"));
-  const filterBtns = Array.from(document.querySelectorAll<HTMLButtonElement>(".prj__filter"));
+  const tiles = Array.from(
+    document.querySelectorAll<HTMLElement>(".prj__tile"),
+  );
+  const filterBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>(".prj__filter"),
+  );
   const empty = document.querySelector<HTMLElement>(".prj__empty");
 
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const value = btn.dataset.filter;
-      filterBtns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+      filterBtns.forEach((b) =>
+        b.setAttribute("aria-pressed", String(b === btn)),
+      );
       let visible = 0;
       tiles.forEach((tile) => {
         const show = value === "Todos" || tile.dataset.category === value;
